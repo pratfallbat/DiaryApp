@@ -1,0 +1,54 @@
+<button class="btn btn-dark mb-3" (click)="showUserForm=!showUserForm">Add User</button>
+<div class="card card-body mb-3" *ngIf="showUserForm">
+  <h2>Add User</h2>
+  <form (submit)="onSubmit($event)"> 
+    <div class="form-group">
+      <label>First Name</label>
+      <input (keydown)="fireEvent($event)" type="text" class="form-control" name="firstName">
+    </div> 
+    <div class="form-group">
+      <label>Last Name</label>
+      <input (keydown)="fireEvent($event)" type="text" class="form-control" name="lastName">
+    </div> 
+    <div class="form-group">
+      <label>Age </label>
+      <input (keydown)="fireEvent($event)" type="number" class="form-control" name="age">
+    </div> 
+    <div class="form-group">
+      <label>Address</label>
+      <input (keydown)="fireEvent($event)" type="text" class="form-control" name="Address">
+    </div> 
+    <button class="btn btn-block mb-3" [ngClass]="currentClasses">Add new user</button>
+  </form>
+</div>
+
+<ul class="list-unstyled">
+  <li class="card card-body mb-2" *ngFor="let user of users" [class.bg-light]="user.isActive" [style.border-color]="user.isActive ? 'green':'red'">
+
+    <div class="row">
+      <div
+        class="col-sm-4">
+        <!-- <img class="img-fluid" src="{{user.img}}" alt=""> -->
+        <img class="img-fluid" bind-src="user.img" alt="">
+      </div>
+      <div
+        class="col-sm-8">
+        <!-- using property binding -->
+        <h3 [ngStyle]="currentStyles">
+          <span [textContent]="user.name"></span>
+          <small>
+            <button (click)="user.hide = !user.hide" class="btn btn-dark btn-sm">
+              <i [ngClass]="user.hide ? 'fa fa-plus': 'fa fa-minus'"></i>
+            </button>
+          </small>
+        </h3>
+        <ul class="list-group" *ngIf="!user.hide">
+          <li class="list-group-item">{{user.birthdate}}</li>
+          <li class="list-group-item">{{user.email}}</li>
+        </ul>
+      </div>
+    </div>
+
+
+  </li>
+</ul>
