@@ -1,0 +1,27 @@
+<form [formGroup]="myform" novalidate (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label>First Name</label>
+    <input
+      type="text"
+      class="form-control"
+      formControlName="firstName"
+      required
+    />
+    <div
+      class="alert alert-danger"
+      *ngIf="firstName.errors && (firstName.dirty || firstName.touched)"
+    >
+      <p *ngIf="firstName.errors.required">firstName is required</p>
+      <p *ngIf="firstName.errors.minlength">
+        firstName must be 8 characters long, we need another
+        {{
+          firstName.errors.minlength.requiredLength -
+            firstName.errors.minlength.actualLength
+        }}
+        characters
+      </p>
+    </div>
+  </div>
+  <button class="btn btn-block mb-3">Add new user Model driven</button>
+</form>
+<pre>{{ myform.value | json }}</pre>

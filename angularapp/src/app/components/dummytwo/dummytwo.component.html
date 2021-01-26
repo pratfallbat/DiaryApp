@@ -1,0 +1,43 @@
+<!-- <form #f="ngForm" (ngSubmit)="onSubmit()">
+  <div
+    class="form-group"
+    [ngClass]="{
+      'alert alert-danger alert-dismissible fade show':
+        firstName?.invalid && (firstName?.dirty || firstName?.touched),
+      'alert alert-success alert-dismissible fade show  ':
+        firstName?.valid && (firstName?.dirty || firstName?.touched)
+    }"
+  >
+    <label>First Name</label>
+    <input
+      type="text"
+      class="form-control"
+      [(ngModel)]="model.firstName"
+      name="firstName"
+      #firstName="ngModel"
+      required
+    />
+    <div
+      class="alert alert-danger alert-dismissible fade show"
+      *ngIf="firstName.errors && (firstName.dirty || firstName.touched)"
+    >
+      <p *ngIf="firstName.errors.required">Email is required</p>
+      <p *ngIf="firstName.errors.minlength">
+        Email must contain at least the @ character
+      </p>
+    </div>
+  </div>
+  <button class="btn btn-block mb-3" [disabled]="f.invalid">
+    Add new user
+  </button>
+</form> -->
+<input
+  type="search"
+  class="form-control"
+  placeholder="Please enter search term"
+  [formControl]="searchField"
+/>
+<hr />
+<ul>
+  <li *ngFor="let search of searches">{{ search }}</li>
+</ul>

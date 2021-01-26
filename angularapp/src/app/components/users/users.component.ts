@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { User } from 'src/app/models/User';
 
 @Component({
   selector: 'app-users',
@@ -6,49 +8,78 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./users.component.css']
 })
 export class UsersComponent implements OnInit {
+  user: User = {
+    firstName: '',
+    lastName: '',
+    email: ''
+  }
+
+  showExtended: boolean;
   currentClasses = {};
   currentStyles = {};
-  users: ussr[]=[];
+  users: User[]=[];
   enableAdd: boolean = true;
   loaded: boolean = true;
   showUserForm: boolean = false;
+  @ViewChild('f') form: any;
+
+  langs: string[] = [
+    'English',
+    'French',
+    'German',
+  ];
+
+  onSubmit({ value, valid }: { value: User, valid: boolean }) {
+    if (!valid) {
+      console.log('form not valid')
+    }
+    else {
+      value.isActive = true;
+      value.registered = new Date();
+      value.hide = true;
+      this.users.unshift(value);      // add to beginning of array
+      this.form.reset();
+    }
+
+
+   
+  }
+
+
 
   constructor() { }
 
   ngOnInit() {
+    
     this.setCurrentClasses();
     this.setCurrentStyles();
    
-
-    this.users.push({
-      user_id: 'abcdef1234ghi',
-      name: 'Mock Holliday',
-      email: 'mock.holliday@example.com' ,
-      birthdate: '1971-08-01T00:00:00+00:00',
-      img: 'https://i.picsum.photos/id/1010/5184/3456.jpg?hmac=7SE0MNAloXpJXDxio2nvoshUx9roGIJ_5pZej6qdxXs',
-      isActive: true,
-      hide:false
-    },
-    {
-      user_id: 'abcdef1234ghi',
-      name: 'Sham',
-      email: 'sham.holliday@example.com' ,
-      birthdate: '1971-08-01T00:00:00+00:00'
-      , img: 'https://i.picsum.photos/id/1003/1181/1772.jpg?hmac=oN9fHMXiqe9Zq2RM6XT-RVZkojgPnECWwyEF1RvvTZk',
-      isActive: false,
-      hide:false
-      },
-  
+    this.users = [
       {
-        user_id: 'abcdef1234ghi',
-        name: 'Ravi',
-        email: 'ravi.holliday@example.com' ,
-        birthdate: '1971-08-04T00:00:00+00:00'
-        ,
-        img: 'https://i.picsum.photos/id/1005/5760/3840.jpg?hmac=2acSJCOwz9q_dKtDZdSB-OIK1HUcwBeXco_RMMTUgfY',
+        firstName: 'John',
+        lastName: 'Doe',
+        email: 'john@gmail.com',
         isActive: true,
-        hide:false
-    });
+        registered: new Date('01/02/2018 08:30:00'),
+        hide: true
+      },
+      {
+        firstName: 'Kevin',
+        lastName: 'Johnson',
+        email: 'kevin@yahoo.com',
+        isActive: false,
+        registered: new Date('03/11/2017 06:20:00'),
+        hide: true
+      },
+      {
+        firstName: 'Karen',
+        lastName: 'Williams',
+        email: 'karen@gmaial.com',
+        isActive: true,
+        registered: new Date('11/02/2016 10:30:00'),
+        hide: true
+      }
+    ];
   }
  
   setCurrentClasses() {
@@ -65,25 +96,7 @@ export class UsersComponent implements OnInit {
       'font-size': this.loaded?'50px': '0'
     }
   }  
-  onSubmit(e) {
-    console.log(123)
-e.preventDefault()
-  }
+  
 
-  fireEvent(eve) {
-    console.log(eve.type) 
-console.log(eve.target.value)    
-  }
-  // toggleHide(user: ussr) {
-  //   user.hide = !user.hide; 
-  // }
-}
-interface ussr{
-  user_id: string,
-  name: string,
-  email: string,
-  birthdate: string,
-  img?: string,
-  isActive?: boolean,
-  hide:boolean
+
 }
