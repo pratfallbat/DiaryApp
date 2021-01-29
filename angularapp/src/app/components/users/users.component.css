@@ -1,3 +1,18 @@
 .big-text{
   text-transform: uppercase;
 }
+
+.card-body{
+  background-color: grey;
+  box-shadow: black;
+  border-width: 15 px;
+  border-style: groove;
+  border-radius: 5px;
+  color: white;
+}
+.bg-new{
+  background-color: rgb(68, 128, 0);
+}
+.card-body .list-group-item{
+  background-color: black;
+}

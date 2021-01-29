@@ -10,6 +10,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DummyComponent } from './components/dummy/dummy.component';
 import { DummytwoComponent } from './components/dummytwo/dummytwo.component';
 import { ModelformComponent } from './components/modelform/modelform.component';
+import { UserService } from './services/user.service';
+import { PostService } from './services/post.service';
+import { PostComponent } from './components/post/post.component';
+import { HttpClientModule } from '@angular/common/http';
+import { PostformComponent } from './components/postform/postform.component';
 
 @NgModule({
   declarations: [
@@ -19,15 +24,18 @@ import { ModelformComponent } from './components/modelform/modelform.component';
     UserComponent,
     DummyComponent,
     DummytwoComponent,
-    ModelformComponent
+    ModelformComponent,
+    PostComponent,
+    PostformComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [UserService,PostService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

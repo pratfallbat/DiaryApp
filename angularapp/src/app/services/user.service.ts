@@ -1,0 +1,41 @@
+import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs';
+import { User } from '../models/User';
+import { of } from 'rxjs/Observable/of';
+
+@Injectable({providedIn: 'root'})
+export class UserService {
+  users : User[] = [];
+  data : Observable <any>;
+  constructor() {
+    this.users = [
+      {
+        firstName: 'John',
+        lastName: 'Doe',
+        email: 'john@gmail.com',
+        isActive: true,
+        registered: new Date('01/02/2018 08:30:00'),
+        hide: true
+      }, {
+        firstName: 'Kevin',
+        lastName: 'Johnson',
+        email: 'kevin@yahoo.com',
+        isActive: true,
+        registered: new Date('03/11/2017 06:20:00'),
+        hide: true
+      }, {
+        firstName: 'Karen',
+        lastName: 'Williams',
+        email: 'karen@gmaial.com',
+        isActive: false,
+        registered: new Date('11/02/2016 10:30:00'),
+        hide: true
+      }
+    ];
+  }
+  getUsers(): Observable<User[]> {
+    return of(this.users);
+  }
+
+ 
+}

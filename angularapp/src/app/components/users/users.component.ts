@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { User } from 'src/app/models/User';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-users',
@@ -39,18 +40,18 @@ export class UsersComponent implements OnInit {
       value.hide = true;
       this.users.unshift(value);      // add to beginning of array
       this.form.reset();
-    }
-
-
-   
+    }   
   }
 
 
 
-  constructor() { }
+  constructor(private userservice:UserService) { }
 
   ngOnInit() {
-    
+    this.userservice.getUsers().subscribe(data => {
+      this.users = data;
+      this.loaded = true;
+    })
     this.setCurrentClasses();
     this.setCurrentStyles();
    
@@ -67,7 +68,7 @@ export class UsersComponent implements OnInit {
         firstName: 'Kevin',
         lastName: 'Johnson',
         email: 'kevin@yahoo.com',
-        isActive: false,
+        isActive: true,
         registered: new Date('03/11/2017 06:20:00'),
         hide: true
       },
@@ -75,7 +76,7 @@ export class UsersComponent implements OnInit {
         firstName: 'Karen',
         lastName: 'Williams',
         email: 'karen@gmaial.com',
-        isActive: true,
+        isActive: false,
         registered: new Date('11/02/2016 10:30:00'),
         hide: true
       }
